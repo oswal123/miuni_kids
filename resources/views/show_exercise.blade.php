@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Miuni Kids - Ejercicio</title>
+    <title>Miuni Kids - Resolver Ejercicio</title>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     <style>
         body {
@@ -20,26 +20,6 @@
             font-size: 24px;
             margin-bottom: 20px;
         }
-        .exercise-board a {
-            color: #3498db;
-            text-decoration: none;
-            font-size: 18px;
-        }
-        .exercise-board a:hover {
-            text-decoration: underline;
-        }
-        .exercise {
-            background-color: #ffffff;
-            color: #000;
-            padding: 10px;
-            border-radius: 5px;
-            margin-bottom: 10px;
-            font-size: 1.2rem;
-        }
-        .completed {
-            background-color: #d4edda;
-            color: #155724;
-        }
     </style>
 </head>
 <body class="bg-gray-100 flex flex-col items-center min-h-screen">
@@ -55,22 +35,27 @@
     
     <!-- Contenido principal -->
     <main class="flex flex-col items-center justify-center flex-grow w-full p-8 text-center">
-        <h1 class="text-green-600 text-5xl font-bold mt-6">Bienvenido a Miuni Kids</h1>
-        <p class="text-gray-600 text-lg mt-4">Aquí puedes comenzar tus ejercicios de matemáticas.</p>
+        <h1 class="text-green-600 text-5xl font-bold mt-6">Resolver Ejercicio</h1>
+        <p class="text-gray-600 text-lg mt-4">Resuelve el siguiente ejercicio:</p>
         
+        @if($errors->any())
+            <div class="text-red-600">
+                @foreach ($errors->all() as $error)
+                    <p>{{ $error }}</p>
+                @endforeach
+            </div>
+        @endif
+
         <div class="exercise-board mt-6">
-            <h2>Ejercicios</h2>
-            @foreach ($exercises as $index => $exercise)
-                <div class="exercise {{ isset($exercise['completed']) && $exercise['completed'] ? 'completed' : '' }}">
-                    @if(isset($exercise['completed']) && $exercise['completed'])
-                        {{ implode(' + ', $exercise['values']) }} = {{ $exercise['result'] }}
-                    @else
-                        <a href="{{ route('show_exercise', ['index' => $index]) }}">
-                            {{ implode(' + ', $exercise) }} =
-                        </a>
-                    @endif
-                </div>
-            @endforeach
+            <h2>{{ implode(' + ', $exercise) }} =</h2>
+            <form action="{{ route('verify_exercise', ['index' => $index]) }}" method="POST" class="w-full max-w-md mt-6">
+                @csrf
+                <input type="hidden" name="exercise" value="{{ json_encode($exercise) }}">
+                <input type="number" name="result" id="result" class="w-full px-4 py-2 border rounded-lg" required>
+                <button type="submit" class="w-full bg-blue-600 text-white px-6 py-3 rounded-lg shadow-lg text-lg font-semibold hover:bg-blue-700 mt-4">
+                    Verificar
+                </button>
+            </form>
         </div>
     </main>
     
