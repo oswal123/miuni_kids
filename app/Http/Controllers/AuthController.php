@@ -9,6 +9,12 @@ use App\Models\User;
 
 class AuthController extends Controller
 {
+    // Mostrar la página de inicio
+    public function showIndex()
+    {
+        return view('auth.index');
+    }
+
     // Mostrar formulario de login
     public function showLogin()
     {
@@ -25,7 +31,7 @@ class AuthController extends Controller
 
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
-            return redirect()->intended('/dashboard');
+            return redirect()->intended('/ejercicio_index');
         }
 
         return back()->withErrors([
