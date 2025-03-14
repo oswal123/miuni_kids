@@ -15,30 +15,60 @@
             padding: 20px;
             border-radius: 10px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
         }
         .exercise-board h2 {
             font-size: 24px;
             margin-bottom: 20px;
-        }
-        .exercise-board a {
-            color: #3498db;
-            text-decoration: none;
-            font-size: 18px;
-        }
-        .exercise-board a:hover {
-            text-decoration: underline;
+            grid-column: span 4;
         }
         .exercise {
             background-color: #ffffff;
             color: #000;
             padding: 10px;
             border-radius: 5px;
-            margin-bottom: 10px;
             font-size: 1.2rem;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
         }
         .completed {
             background-color: #d4edda;
             color: #155724;
+        }
+        .numero {
+            padding: 15px;
+            background-color: #f1f1f1;
+            border-radius: 8px;
+            margin: 5px 0;
+            width: 100px;
+            text-align: right;
+        }
+        .operador {
+            font-size: 3rem;
+            margin: 5px 0;
+            width: 100px;
+            text-align: right;
+        }
+        .linea {
+            margin-top: 10px;
+            width: 100%;
+            height: 3px;
+            background-color: black;
+            margin-bottom: 20px;
+        }
+        .suma-item {
+            display: flex;
+            align-items: center;
+        }
+        .suma-item .operador {
+            margin-right: 10px;
+        }
+        .exercise a {
+            text-decoration: none;
+            color: inherit;
         }
     </style>
 </head>
@@ -62,12 +92,18 @@
             <h2>Ejercicios</h2>
             @foreach ($exercises as $index => $exercise)
                 <div class="exercise {{ isset($exercise['completed']) && $exercise['completed'] ? 'completed' : '' }}">
+                    <div class="numero">{{ $exercise['values'][0] ?? $exercise[0] }}</div>
+                    <div class="numero">{{ $exercise['values'][1] ?? $exercise[1] }}</div>
+                    <div class="numero">{{ $exercise['values'][2] ?? $exercise[2] }}</div>
+                    <div class="suma-item">
+                        <div class="operador">+</div>
+                        <div class="numero">{{ $exercise['values'][3] ?? $exercise[3] }}</div>
+                    </div>
+                    <div class="linea"></div>
                     @if(isset($exercise['completed']) && $exercise['completed'])
-                        {{ implode(' + ', $exercise['values']) }} = {{ $exercise['result'] }}
+                        <div class="numero">{{ $exercise['result'] }}</div>
                     @else
-                        <a href="{{ route('show_exercise', ['index' => $index]) }}">
-                            {{ implode(' + ', $exercise) }} =
-                        </a>
+                        <a href="{{ route('show_exercise', ['index' => $index]) }}" class="numero">Resolver</a>
                     @endif
                 </div>
             @endforeach
