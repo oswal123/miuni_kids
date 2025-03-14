@@ -26,7 +26,7 @@ class ExerciseController extends Controller
         for ($i = $totalExercises; $i < 8; $i++) {
             $values = [];
             for ($j = 0; $j < 4; $j++) {
-                $values[] = rand(0, 9);
+                $values[] = rand(1000, 9999); // Generar números de 4 dígitos
             }
             $newExercises[] = $values;
         }
