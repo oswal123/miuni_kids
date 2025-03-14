@@ -23,7 +23,7 @@
         <!-- Espacio para el logo -->
         <div class="w-40 h-40 bg-gray-300 flex items-center justify-center rounded-lg shadow-lg">
             <!-- Aquí se insertará el logo -->
-            <span class="text-gray-500">Logo aquí</span>
+            <img src="{{ asset('images/logo.png') }}" alt="Miuni Kids Logo" class="w-full h-full object-contain">
         </div>
         
         <h1 class="text-green-600 text-5xl font-bold mt-6">Miuni Kids</h1>
