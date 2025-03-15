@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Miuni Kids - Ejercicio</title>
+    <title>Miuni Kids - Nivel 2</title>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     <style>
         body {
@@ -70,7 +70,41 @@
             text-decoration: none;
             color: inherit;
         }
+        .reiniciar-btn {
+            background-color: #e74c3c;
+            color: white;
+            padding: 10px 20px;
+            font-size: 1rem;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+        .reiniciar-btn:hover {
+            background-color: #c0392b;
+        }
+        .nivel-links {
+            margin-top: 20px;
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+        }
+        .nivel-links a {
+            background-color: #3498db;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+        }
+        .nivel-links a:hover {
+            background-color: #2980b9;
+        }
     </style>
+    <script>
+        function confirmarReinicio() {
+            return confirm('¿Estás seguro de que deseas reiniciar el nivel? Se perderán todos los ejercicios completados.');
+        }
+    </script>
 </head>
 <body class="bg-gray-100 flex flex-col items-center min-h-screen">
     
@@ -85,7 +119,7 @@
     
     <!-- Contenido principal -->
     <main class="flex flex-col items-center justify-center flex-grow w-full p-8 text-center">
-        <h1 class="text-green-600 text-5xl font-bold mt-6">Bienvenido a Miuni Kids</h1>
+        <h1 class="text-green-600 text-5xl font-bold mt-6">Bienvenido a Miuni Kids - Nivel 2</h1>
         <p class="text-gray-600 text-lg mt-4">Aquí puedes comenzar tus ejercicios de matemáticas.</p>
         
         <div class="exercise-board mt-6">
@@ -107,6 +141,17 @@
                     @endif
                 </div>
             @endforeach
+        </div>
+        
+        <form action="{{ route('reiniciar_nivel2') }}" method="POST" onsubmit="return confirmarReinicio();">
+            @csrf
+            <button type="submit" class="reiniciar-btn">Reiniciar Nivel</button>
+        </form>
+
+        <div class="nivel-links">
+            <a href="{{ route('ejercicio_nivel1') }}">Nivel 1</a>
+            <a href="{{ route('ejercicio_nivel2') }}">Nivel 2</a>
+            <a href="{{ route('ejercicio_nivel3') }}">Nivel 3</a>
         </div>
     </main>
     

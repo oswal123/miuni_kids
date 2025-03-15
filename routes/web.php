@@ -15,6 +15,11 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware('auth');
 
-Route::get('/ejercicio_index', [ExerciseController::class, 'showExercise'])->name('ejercicio_index')->middleware('auth');
+Route::get('/ejercicio_nivel1', [ExerciseController::class, 'showExercise'])->name('ejercicio_nivel1')->middleware('auth');
+Route::get('/ejercicio_nivel2', [ExerciseController::class, 'showExerciseNivel2'])->name('ejercicio_nivel2')->middleware('auth');
+Route::get('/ejercicio_nivel3', [ExerciseController::class, 'showExerciseNivel3'])->name('ejercicio_nivel3')->middleware('auth');
 Route::get('/ejercicio/{index}', [ExerciseController::class, 'showSingleExercise'])->name('show_exercise')->middleware('auth');
-Route::post('/ejercicio/{index}', [ExerciseController::class, 'verifyExercise'])->name('verify_exercise')->middleware('auth');
+Route::post('/ejercicio/{index}/verificar', [ExerciseController::class, 'verifyExercise'])->name('verify_exercise')->middleware('auth');
+Route::post('/reiniciar-nivel', [ExerciseController::class, 'reiniciarNivel'])->name('reiniciar_nivel')->middleware('auth');
+Route::post('/reiniciar-nivel2', [ExerciseController::class, 'reiniciarNivel2'])->name('reiniciar_nivel2')->middleware('auth');
+Route::post('/reiniciar-nivel3', [ExerciseController::class, 'reiniciarNivel3'])->name('reiniciar_nivel3')->middleware('auth');

@@ -164,7 +164,7 @@
     <!-- Contenido principal -->
     <main class="flex flex-col items-center justify-center flex-grow w-full p-8 text-center">
         <h1 class="text-green-600 text-5xl font-bold mt-6">¡Resuelve este ejercicio de suma!</h1>
-        <a href="{{ route('ejercicio_index') }}" class="text-blue-600 font-semibold hover:underline mt-4">Volver a los Ejercicios</a>
+        <a href="{{ route('ejercicio_nivel' . $level) }}" class="text-blue-600 font-semibold hover:underline mt-4">Volver a los Ejercicios</a>
         
         <div class="suma mt-6">
             <div class="numero">{{ $exercise[0] }}</div>

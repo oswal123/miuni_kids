@@ -12,7 +12,7 @@ class AuthController extends Controller
     // Mostrar la página de inicio
     public function showIndex()
     {
-        return view('auth.index');
+        return view('index');
     }
 
     // Mostrar formulario de login
@@ -24,18 +24,15 @@ class AuthController extends Controller
     // Procesar login
     public function login(Request $request)
     {
-        $credentials = $request->validate([
-            'email' => 'required|email',
-            'password' => 'required',
-        ]);
+        $credentials = $request->only('email', 'password');
 
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
-            return redirect()->intended('/ejercicio_index');
+            return redirect()->intended('ejercicio_nivel1');
         }
 
         return back()->withErrors([
-            'email' => 'Las credenciales no coinciden con nuestros registros.',
+            'email' => 'Las credenciales proporcionadas no coinciden con nuestros registros.',
         ]);
     }
 
@@ -69,6 +66,6 @@ class AuthController extends Controller
         Auth::logout();
         $request->session()->invalidate();
         $request->session()->regenerateToken();
-        return redirect('/login');
+        return redirect('/');
     }
 }
