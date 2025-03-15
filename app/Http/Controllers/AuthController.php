@@ -12,7 +12,7 @@ class AuthController extends Controller
     // Mostrar la página de inicio
     public function showIndex()
     {
-        return view('index');
+        return view('auth.index'); // Asegúrate de que la vista esté en la carpeta 'auth'
     }
 
     // Mostrar formulario de login
