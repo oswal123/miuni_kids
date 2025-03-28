@@ -1,3 +1,4 @@
 
 Instalar dependencias de Composer:
 composer install
+cambiar la linea 25 en env. DB_PORT=3307 a 3306
